@@ -4,8 +4,10 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    Rigidbody2D rb2d;
+    
     [SerializeField] float torqueAmount = 1f;
+    Rigidbody2D rb2d;
+
     void Start()
     {
         rb2d = GetComponent<Rigidbody2D>();
