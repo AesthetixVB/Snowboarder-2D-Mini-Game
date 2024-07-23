@@ -13,6 +13,7 @@ public class CrashDetector : MonoBehaviour
         if(other.tag == "Ground")
         {
             crashEffect.Play();
+            GetComponent<AudioSource>().Play();
             Invoke("ReloadScene", loadDelay);
         }
     }
