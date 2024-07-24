@@ -1,7 +1,6 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Xml.Serialization;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
@@ -12,7 +11,13 @@ public class PlayerController : MonoBehaviour
     [SerializeField] float baseSpeed = 0;
     Rigidbody2D rb2d;
     SurfaceEffector2D surfaceEffector2D;
+    bool canMove = true;
+    AudioManager audioManager;
 
+    void Awake()
+    {
+        audioManager = GameObject.FindGameObjectWithTag("Audio").GetComponent<AudioManager>();
+    }
     void Start()
     {
         rb2d = GetComponent<Rigidbody2D>();
@@ -21,11 +26,19 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
-        RotatePlayer();
-        RespondToBoost();
+        if (canMove)
+        {
+            RotatePlayer();
+            RespondToBoost();
+        }
     }
 
-    private void RespondToBoost()
+    public void DisableControls()
+    {
+        canMove = false;
+    }
+
+    void RespondToBoost()
     {
         if (Input.GetKey(KeyCode.UpArrow))
         {
