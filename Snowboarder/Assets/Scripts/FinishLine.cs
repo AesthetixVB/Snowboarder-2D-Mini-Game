@@ -9,8 +9,6 @@ public class FinishLine : MonoBehaviour
     [SerializeField] ParticleSystem finishEffect;
     [SerializeField] bool goNextLevel;
     [SerializeField] string levelName; 
-    //this is to note what level the next level will reload
-    //doesn't actuallly change anything
     AudioManager audioManager;
 
     void Awake()

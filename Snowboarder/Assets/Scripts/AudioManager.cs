@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class AudioManager : MonoBehaviour
@@ -18,13 +19,17 @@ public class AudioManager : MonoBehaviour
         musicSource.clip = background;
         musicSource.Play();
     }
-
+    void Awake()
+    {
+        DontDestroyOnLoad(gameObject);
+    }
     public void PlaySFX(AudioClip clip)
     {
         SFXSource.PlayOneShot(clip);
+        SFXSource.mute = false;
     }
     public void StopSFX(AudioClip clip)
     {
-        SFXSource.Stop();
+        SFXSource.mute = true;
     }
 }
