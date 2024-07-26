@@ -5,31 +5,51 @@ using UnityEngine;
 
 public class AudioManager : MonoBehaviour
 {
+    private static AudioManager instance;
+    
     [Header("Audio Source")]
     [SerializeField] AudioSource musicSource;
     [SerializeField] AudioSource SFXSource;
     [Header("Audio Clip")]
-    public AudioClip background;
-    public AudioClip crash;
-    public AudioClip finish;
-    public AudioClip trail;
+    public AudioClip backgroundMusic;
+    public AudioClip crashSFX;
+    public AudioClip finishSFX;
+    public AudioClip trailSFX;
 
     void Start()
     {
-        musicSource.clip = background;
+
+        musicSource.clip = backgroundMusic;
         musicSource.Play();
+        
     }
     void Awake()
     {
-        DontDestroyOnLoad(gameObject);
+        if (instance == null)
+        {
+
+            instance = this;
+            DontDestroyOnLoad(gameObject);
+
+        }
+        else
+        {
+
+            Destroy(gameObject);
+
+        }
     }
     public void PlaySFX(AudioClip clip)
     {
+        
         SFXSource.PlayOneShot(clip);
         SFXSource.mute = false;
+        
     }
     public void StopSFX(AudioClip clip)
     {
+
         SFXSource.mute = true;
+
     }
 }

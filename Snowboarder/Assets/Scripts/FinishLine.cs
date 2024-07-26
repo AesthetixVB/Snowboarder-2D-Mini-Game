@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 public class FinishLine : MonoBehaviour
 {
     [SerializeField] float loadDelay = 1f;
-    [SerializeField] ParticleSystem finishEffect;
+    [SerializeField] ParticleSystem finishParticles;
     [SerializeField] bool goNextLevel;
     [SerializeField] string levelName; 
     AudioManager audioManager;
@@ -19,8 +19,8 @@ public class FinishLine : MonoBehaviour
     {
         if(other.tag == "Player")
         {
-            finishEffect.Play();
-            audioManager.PlaySFX(audioManager.finish);
+            finishParticles.Play();
+            audioManager.PlaySFX(audioManager.finishSFX);
             if(goNextLevel)
             {
                 Invoke("NextScene", loadDelay);

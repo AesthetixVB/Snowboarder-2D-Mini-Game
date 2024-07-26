@@ -6,10 +6,10 @@ MonoImporter:
   defaultReferences:
   - musicSource: {instanceID: 0}
   - SFXSource: {instanceID: 0}
-  - background: {fileID: 8300000, guid: 3b61f69dcb824f447b62c86ac6938d36, type: 3}
-  - crash: {fileID: 8300000, guid: 9322158cde5f89e4aa57c1601b52f8e9, type: 3}
-  - checkpoint: {instanceID: 0}
-  - finish: {fileID: 8300000, guid: 45b8da2d29544104a91b97b5b1836b4a, type: 3}
+  - backgroundMusic: {fileID: 8300000, guid: 3b61f69dcb824f447b62c86ac6938d36, type: 3}
+  - crashSFX: {fileID: 8300000, guid: 9322158cde5f89e4aa57c1601b52f8e9, type: 3}
+  - finishSFX: {fileID: 8300000, guid: 45b8da2d29544104a91b97b5b1836b4a, type: 3}
+  - trailSFX: {fileID: 8300000, guid: ec49766931f4e2c48b9eb7d0b41ee58f, type: 3}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

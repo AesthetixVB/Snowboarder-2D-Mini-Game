@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class DustTrail : MonoBehaviour
 {
-    [SerializeField] ParticleSystem dustEffect;
+    [SerializeField] ParticleSystem dustParticles;
     AudioManager audioManager;
 
     void Awake()
@@ -16,8 +16,8 @@ public class DustTrail : MonoBehaviour
     {
         if(other.gameObject.tag == "Ground")
         {
-            dustEffect.Play();
-            audioManager.PlaySFX(audioManager.trail);
+            dustParticles.Play();
+            audioManager.PlaySFX(audioManager.trailSFX);
         }
     }
     
@@ -25,8 +25,8 @@ public class DustTrail : MonoBehaviour
     {
         if(other.gameObject.tag == "Ground")
         {
-            dustEffect.Stop();
-            audioManager.StopSFX(audioManager.trail);
+            dustParticles.Stop();
+            audioManager.StopSFX(audioManager.trailSFX);
         }
     }
     
