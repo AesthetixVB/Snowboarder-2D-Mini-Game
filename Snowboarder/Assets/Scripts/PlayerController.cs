@@ -5,32 +5,50 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    
-    [SerializeField] float torqueAmount = 17.5f;
-    [SerializeField] float boostSpeed = 15f;
-    [SerializeField] float baseSpeed = 8;
     Rigidbody2D rb2d;
     SurfaceEffector2D surfaceEffector2D;
+
+
+    [Header("Movement System")]
+    [SerializeField] float torqueAmount;
+    [SerializeField] float boostSpeed;
+    [SerializeField] float baseSpeed;
     bool canMove = true;
+    
+    [Header("Jump System")]
+    [SerializeField] float jumpPower; 
+    [SerializeField] float fallMultiplier;
+    public Transform groundCheck;
+    public LayerMask groundLayer;
+    Vector2 vecGravity;
+
+
+    // Audio Manager
     AudioManager audioManager;
 
-    void Awake()
-    {
-        audioManager = GameObject.FindGameObjectWithTag("Audio").GetComponent<AudioManager>();
-    }
     void Start()
     {
         rb2d = GetComponent<Rigidbody2D>();
         surfaceEffector2D = FindObjectOfType<SurfaceEffector2D>();
+        vecGravity = new Vector2(0, -Physics2D.gravity.y);
     }
+    void Awake()
+    {
+        audioManager = GameObject.FindGameObjectWithTag("Audio").GetComponent<AudioManager>();
+
+    }
+
 
     void Update()
     {
+
         if (canMove)
         {
             RotatePlayer();
             RespondToBoost();
+            JumpPlayer();
         }
+
     }
 
     public void DisableControls()
@@ -61,4 +79,25 @@ public class PlayerController : MonoBehaviour
             rb2d.AddTorque(-torqueAmount);
         }
     }
+
+    void JumpPlayer()
+    {
+        
+        if (Input.GetKey(KeyCode.Space) && isGrounded())
+        {
+            rb2d.velocity = new Vector2(rb2d.velocity.x, jumpPower);
+
+        }
+        if (rb2d.velocity.y < 0)
+        {
+            rb2d.velocity -= vecGravity * fallMultiplier * Time.deltaTime; 
+        }
+
+    }
+
+    bool isGrounded()
+    {
+        return Physics2D.OverlapCapsule(groundCheck.position, new Vector2(2.9f, 0.25f), CapsuleDirection2D.Horizontal, 0, groundLayer);
+    }
+
 }
